@@ -87,7 +87,7 @@ export const NAV_LINKS = [
   { label: "Projects", href: "#projects" }
 ];
 
-export const PROFILE_IMAGE = "profile.jpeg";
+export const PROFILE_IMAGE = "./profile.jpeg";
 
 export const TESTIMONIALS = [
   {
