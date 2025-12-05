@@ -1,4 +1,4 @@
-
+/* ... imports ... */
 import { RESUME_DATA, NAV_LINKS, PROFILE_IMAGE, TESTIMONIALS } from './constants.js';
 
 const root = document.getElementById('root');
@@ -6,22 +6,15 @@ const root = document.getElementById('root');
 // --- Components ---
 
 function Navbar() {
-  const linksHTML = NAV_LINKS.map(link => `
-    <a href="${link.href}" class="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">
-      ${link.label}
-    </a>
-  `).join('');
-
+// ... existing Navbar code ...
   return `
-    <nav class="fixed top-0 left-0 right-0 z-40 glass-panel transition-colors duration-300">
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel transition-colors duration-300">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between">
         <a href="#" class="font-bold text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg">A</span>
+          <span class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg font-mono">A</span>
           Adam.C
         </a>
-
-        <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-8">
+<!-- ... rest of Navbar ... -->
           ${linksHTML}
           <div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
           <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
@@ -29,8 +22,7 @@ function Navbar() {
             <i data-lucide="sun" class="block dark:hidden" width="20"></i>
           </button>
         </div>
-
-        <!-- Mobile Menu Button -->
+<!-- ... mobile menu buttons ... -->
         <div class="flex items-center gap-4 md:hidden">
           <button id="theme-toggle-mobile" class="p-2 text-slate-600 dark:text-slate-300">
              <i data-lucide="moon" class="hidden dark:block" width="20"></i>
@@ -41,8 +33,7 @@ function Navbar() {
           </button>
         </div>
       </div>
-
-      <!-- Mobile Menu -->
+<!-- ... mobile menu content ... -->
       <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-lg">
         <div class="flex flex-col p-4 gap-4">
           ${NAV_LINKS.map(link => `
@@ -58,9 +49,12 @@ function Hero() {
   const { name, title, summary, contact } = RESUME_DATA;
   return `
     <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      <!-- Background Blobs -->
-      <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-200 dark:bg-blue-900/30 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-      <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-indigo-200 dark:bg-indigo-900/30 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      
+      <!-- ReactBits Style: Dot Grid Background -->
+      <div class="absolute inset-0 z-0 bg-dot-grid pointer-events-none opacity-60"></div>
+      
+      <!-- Gradient Glow (Spotlight feel) -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/20 blur-[100px] rounded-full pointer-events-none"></div>
 
       <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col-reverse md:flex-row items-center gap-12">
@@ -71,7 +65,7 @@ function Hero() {
               Available for Hire
             </div>
             <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">
-              Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">${name}</span>
+              Hi, I'm <span id="hacker-text" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 font-mono" data-value="${name}">${name}</span>
             </h1>
             <h2 class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium mb-6">
               ${title}
@@ -113,6 +107,7 @@ function Hero() {
                 src="${PROFILE_IMAGE}" 
                 alt="${name}" 
                 class="relative z-10 w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-2xl"
+                onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Adam+Chia&background=2563eb&color=fff&size=512';"
               >
             </div>
           </div>
@@ -138,13 +133,14 @@ function Skills() {
     </div>
   `).join('');
 
+  // Added spotlight-card class
   const listHTML = RESUME_DATA.skills.map((category, idx) => `
-    <div class="bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all hover:-translate-y-1">
-      <h3 class="font-bold text-slate-800 dark:text-white mb-3 flex items-center gap-2">
+    <div class="spotlight-card bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all hover:-translate-y-1">
+      <h3 class="font-bold text-slate-800 dark:text-white mb-3 flex items-center gap-2 relative z-10">
         <span class="w-2.5 h-2.5 rounded-full ${COLORS[idx % COLORS.length]} shadow-[0_0_8px_currentColor]"></span>
         ${category.name}
       </h3>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2 relative z-10">
         ${category.skills.map(skill => `
           <span class="px-2.5 py-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-lg">
             ${skill}
@@ -176,6 +172,7 @@ function Skills() {
 }
 
 function Experience() {
+  // ... existing Experience code ...
   const experiencesHTML = RESUME_DATA.experience.map(exp => `
     <div class="relative pl-8 md:pl-10 border-l-2 border-slate-200 dark:border-slate-700 pb-12 last:pb-0">
       <div class="absolute -left-[9px] top-0 w-4 h-4 bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-full shadow-[0_0_0_4px_rgba(59,130,246,0.1)]"></div>
@@ -225,19 +222,21 @@ function Experience() {
               </div>
               
               ${RESUME_DATA.education.map(edu => `
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
-                  <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">${edu.school}</h3>
-                    <span class="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full border border-green-200 dark:border-green-900">
-                      CGPA 3.47
-                    </span>
+                <div class="spotlight-card bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                  <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">${edu.school}</h3>
+                        <span class="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full border border-green-200 dark:border-green-900">
+                        CGPA 3.47
+                        </span>
+                    </div>
+                    <div class="text-slate-700 dark:text-slate-300 font-medium mb-1">${edu.degree}</div>
+                    <div class="text-slate-400 text-sm mb-6">${edu.duration}</div>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        <span class="font-semibold text-slate-900 dark:text-slate-200 block mb-2">Key Coursework:</span>
+                        Data Structure, Deep Learning, NLP, Business Intelligence.
+                    </p>
                   </div>
-                  <div class="text-slate-700 dark:text-slate-300 font-medium mb-1">${edu.degree}</div>
-                  <div class="text-slate-400 text-sm mb-6">${edu.duration}</div>
-                  <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                    <span class="font-semibold text-slate-900 dark:text-slate-200 block mb-2">Key Coursework:</span>
-                    Data Structure, Deep Learning, NLP, Business Intelligence.
-                  </p>
                 </div>
               `).join('')}
             </div>
@@ -253,9 +252,11 @@ function Experience() {
                 ${RESUME_DATA.activities.map(act => {
                   const [title, desc] = act.split(': ');
                   return `
-                    <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-amber-300 dark:hover:border-amber-700 transition-colors group">
-                      <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2 group-hover:text-amber-600 transition-colors">${title}</h4>
-                      <p class="text-slate-600 dark:text-slate-400 text-sm">${desc}</p>
+                    <div class="spotlight-card bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-amber-300 dark:hover:border-amber-700 transition-colors group">
+                      <div class="relative z-10">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2 group-hover:text-amber-600 transition-colors">${title}</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">${desc}</p>
+                      </div>
                     </div>
                   `;
                 }).join('')}
@@ -275,6 +276,7 @@ function Projects() {
     'from-emerald-600 to-teal-500'
   ];
 
+  // Added spotlight-card class and relative z-10 wrappers
   const projectsHTML = RESUME_DATA.projects.map((project, idx) => {
     const gradient = gradients[idx % gradients.length];
     const techHTML = project.tech.split(', ').map(tech => 
@@ -282,9 +284,9 @@ function Projects() {
     ).join('');
 
     return `
-      <div class="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 reveal">
+      <div class="spotlight-card group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 reveal">
         <!-- Image Area -->
-        <div class="h-48 bg-gradient-to-br ${gradient} p-6 flex flex-col justify-end relative overflow-hidden">
+        <div class="h-48 bg-gradient-to-br ${gradient} p-6 flex flex-col justify-end relative overflow-hidden z-10">
           <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
           <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-lg text-white">
              <i data-lucide="code-2" width="20"></i>
@@ -292,7 +294,7 @@ function Projects() {
           <h3 class="text-xl font-bold text-white relative z-10 drop-shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${project.title}</h3>
         </div>
         
-        <div class="p-6 flex-1 flex flex-col">
+        <div class="p-6 flex-1 flex flex-col relative z-10">
           <div class="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-4">
             <i data-lucide="calendar" width="12"></i>
             ${project.date}
@@ -342,6 +344,7 @@ function Projects() {
   `;
 }
 
+// ... existing Testimonials and Footer code ...
 function Testimonials() {
   return `
     <section class="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
@@ -406,7 +409,6 @@ function setupUI() {
   const toggleBtns = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
   const html = document.documentElement;
   
-  // Check local storage or system preference
   if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     html.classList.add('dark');
   }
@@ -437,8 +439,7 @@ function setupUI() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        // Animate progress bars if inside skills section
-        if (entry.target.querySelector('.bg-blue-500')) { // Check if it's skills chart
+        if (entry.target.querySelector('.bg-blue-500')) { 
              const bars = entry.target.querySelectorAll('[data-width]');
              bars.forEach(bar => {
                  bar.style.width = bar.getAttribute('data-width');
@@ -477,12 +478,61 @@ function setupUI() {
     renderTestimonial();
   });
 
-  // Init first testimonial
   if (container) renderTestimonial();
+
+  // 5. Hacker Text Effect (ReactBits Style)
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const hackerText = document.getElementById("hacker-text");
+
+  if (hackerText) {
+    let interval = null;
+    const originalText = hackerText.dataset.value;
+    
+    const animateText = () => {
+      let iteration = 0;
+      clearInterval(interval);
+      
+      interval = setInterval(() => {
+        hackerText.innerText = originalText
+          .split("")
+          .map((letter, index) => {
+            if(index < iteration) {
+              return originalText[index];
+            }
+            return letters[Math.floor(Math.random() * 26)];
+          })
+          .join("");
+        
+        if(iteration >= originalText.length){ 
+          clearInterval(interval);
+        }
+        
+        iteration += 1 / 3;
+      }, 30);
+    };
+
+    // Run on load
+    animateText();
+    // Run on hover
+    hackerText.onmouseover = animateText;
+  }
+
+  // 6. Spotlight Effect for Cards (ReactBits Style)
+  const cards = document.querySelectorAll(".spotlight-card");
+  
+  cards.forEach(card => {
+    card.onmousemove = e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  });
 }
 
-// --- Main Render ---
-
+// ... render function ...
 function render() {
   root.innerHTML = `
     ${Navbar()}
@@ -494,12 +544,8 @@ function render() {
     ${Footer()}
   `;
   
-  // Initialize Icons
   lucide.createIcons();
-  
-  // Initialize Logic
   setupUI();
 }
 
-// Run
 render();
