@@ -1,4 +1,4 @@
-/* ... imports ... */
+
 import { RESUME_DATA, NAV_LINKS, PROFILE_IMAGE, TESTIMONIALS } from './constants.js';
 
 const root = document.getElementById('root');
@@ -6,7 +6,12 @@ const root = document.getElementById('root');
 // --- Components ---
 
 function Navbar() {
-// ... existing Navbar code ...
+  const linksHTML = NAV_LINKS.map(link => `
+    <a href="${link.href}" class="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">
+      ${link.label}
+    </a>
+  `).join('');
+
   return `
     <nav class="fixed top-0 left-0 right-0 z-50 glass-panel transition-colors duration-300">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -14,7 +19,9 @@ function Navbar() {
           <span class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg font-mono">A</span>
           Adam.C
         </a>
-<!-- ... rest of Navbar ... -->
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8">
           ${linksHTML}
           <div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
           <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
@@ -22,7 +29,8 @@ function Navbar() {
             <i data-lucide="sun" class="block dark:hidden" width="20"></i>
           </button>
         </div>
-<!-- ... mobile menu buttons ... -->
+
+        <!-- Mobile Menu Button -->
         <div class="flex items-center gap-4 md:hidden">
           <button id="theme-toggle-mobile" class="p-2 text-slate-600 dark:text-slate-300">
              <i data-lucide="moon" class="hidden dark:block" width="20"></i>
@@ -33,7 +41,8 @@ function Navbar() {
           </button>
         </div>
       </div>
-<!-- ... mobile menu content ... -->
+
+      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-lg">
         <div class="flex flex-col p-4 gap-4">
           ${NAV_LINKS.map(link => `
@@ -106,7 +115,7 @@ function Hero() {
               <img 
                 src="${PROFILE_IMAGE}" 
                 alt="${name}" 
-                class="relative z-10 w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-2xl"
+                class="relative z-10 w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-2xl bg-slate-100"
                 onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Adam+Chia&background=2563eb&color=fff&size=512';"
               >
             </div>
@@ -133,7 +142,7 @@ function Skills() {
     </div>
   `).join('');
 
-  // Added spotlight-card class
+  // SpotLight Card Class added
   const listHTML = RESUME_DATA.skills.map((category, idx) => `
     <div class="spotlight-card bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all hover:-translate-y-1">
       <h3 class="font-bold text-slate-800 dark:text-white mb-3 flex items-center gap-2 relative z-10">
@@ -172,7 +181,6 @@ function Skills() {
 }
 
 function Experience() {
-  // ... existing Experience code ...
   const experiencesHTML = RESUME_DATA.experience.map(exp => `
     <div class="relative pl-8 md:pl-10 border-l-2 border-slate-200 dark:border-slate-700 pb-12 last:pb-0">
       <div class="absolute -left-[9px] top-0 w-4 h-4 bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-full shadow-[0_0_0_4px_rgba(59,130,246,0.1)]"></div>
@@ -344,7 +352,6 @@ function Projects() {
   `;
 }
 
-// ... existing Testimonials and Footer code ...
 function Testimonials() {
   return `
     <section class="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
@@ -532,7 +539,8 @@ function setupUI() {
   });
 }
 
-// ... render function ...
+// --- Main Render ---
+
 function render() {
   root.innerHTML = `
     ${Navbar()}
