@@ -72,3 +72,56 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Dot Grid Background */
+.bg-dot-grid {
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+.dark .bg-dot-grid {
+  background-image: radial-gradient(circle, #334155 1px, transparent 1px);
+}
+
+/* Spotlight Effect */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(59, 130, 246, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* For Dark Mode Spotlight */
+.dark .spotlight-card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+}
+
+/* Hacker Text Cursor */
+.hacker-text {
+  font-family: 'Courier New', Courier, monospace;
+}
