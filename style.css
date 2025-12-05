@@ -1,18 +1,20 @@
 body { 
   font-family: 'Inter', sans-serif; 
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+  width: 100%;
 }
 
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque for better readability */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .dark .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.85);
   border-bottom: 1px solid rgba(51, 65, 85, 0.5);
 }
 
@@ -46,7 +48,7 @@ body {
   background: #94a3b8;
 }
 
-/* Chat Animations */
+/* Animation Utilities */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -54,23 +56,6 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
-}
-
-.chat-open-enter {
-  transform: translateY(20px) scale(0.95);
-  opacity: 0;
-}
-.chat-open-enter-active {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Utility for text gradients in dark/light mode */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Dot Grid Background */
@@ -88,6 +73,11 @@ body {
 .spotlight-card {
   position: relative;
   overflow: hidden;
+  /* Default border for mobile/touch where hover doesn't exist */
+  border: 1px solid rgba(226, 232, 240, 0.8); 
+}
+.dark .spotlight-card {
+  border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
 .spotlight-card::before {
@@ -108,8 +98,11 @@ body {
   z-index: 1;
 }
 
-.spotlight-card:hover::before {
-  opacity: 1;
+/* Only enable hover effect on devices that support hover */
+@media (hover: hover) {
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
 }
 
 /* For Dark Mode Spotlight */
@@ -124,4 +117,11 @@ body {
 /* Hacker Text Cursor */
 .hacker-text {
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* Utility for text gradients */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
