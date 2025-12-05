@@ -36,17 +36,17 @@ function Navbar() {
              <i data-lucide="moon" class="hidden dark:block" width="20"></i>
              <i data-lucide="sun" class="block dark:hidden" width="20"></i>
           </button>
-          <button id="mobile-menu-btn" class="text-slate-900 dark:text-white">
+          <button id="mobile-menu-btn" class="text-slate-900 dark:text-white p-1">
             <i data-lucide="menu" width="24"></i>
           </button>
         </div>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-lg">
-        <div class="flex flex-col p-4 gap-4">
+      <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-xl z-40">
+        <div class="flex flex-col p-4 gap-2">
           ${NAV_LINKS.map(link => `
-             <a href="${link.href}" class="block text-slate-600 dark:text-slate-300 py-2 hover:text-blue-600 dark:hover:text-blue-400 font-medium">${link.label}</a>
+             <a href="${link.href}" class="block px-4 py-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg font-medium transition-colors">${link.label}</a>
           `).join('')}
         </div>
       </div>
@@ -57,60 +57,65 @@ function Navbar() {
 function Hero() {
   const { name, title, summary, contact } = RESUME_DATA;
   return `
-    <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <section id="home" class="relative pt-28 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300 min-h-screen flex items-center">
       
       <!-- ReactBits Style: Dot Grid Background -->
       <div class="absolute inset-0 z-0 bg-dot-grid pointer-events-none opacity-60"></div>
       
-      <!-- Gradient Glow (Spotlight feel) -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/20 blur-[100px] rounded-full pointer-events-none"></div>
+      <!-- Gradient Glow -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 dark:bg-blue-500/20 blur-[80px] rounded-full pointer-events-none"></div>
 
       <div class="container mx-auto px-4 relative z-10">
-        <div class="flex flex-col-reverse md:flex-row items-center gap-12">
+        <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
           
           <!-- Text Content -->
-          <div class="flex-1 text-center md:text-left reveal">
-            <div class="inline-block mb-4 px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold tracking-wide uppercase">
+          <div class="flex-1 text-center md:text-left reveal w-full">
+            <div class="inline-block mb-4 px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-xs md:text-sm font-semibold tracking-wide uppercase">
               Available for Hire
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">
+            
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight mb-4 leading-tight">
               Hi, I'm <span id="hacker-text" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 font-mono" data-value="${name}">${name}</span>
             </h1>
-            <h2 class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium mb-6">
+            
+            <h2 class="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium mb-6 h-auto min-h-[3rem]">
               ${title}
             </h2>
-            <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
+            
+            <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
               ${summary}
             </p>
 
-            <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-              <a href="mailto:${contact.email}" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 transform duration-200">
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-3 md:gap-4 mb-10 w-full">
+              <a href="mailto:${contact.email}" class="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 transform duration-200 w-full sm:w-auto">
                 <i data-lucide="mail" width="20"></i>
                 <span class="font-medium">Get in Touch</span>
               </a>
-              <a href="${contact.linkedin}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-1 shadow-sm">
-                <i data-lucide="linkedin" width="20"></i>
-                <span class="font-medium">LinkedIn</span>
-              </a>
-              <a href="${contact.github}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-1 shadow-sm">
-                <i data-lucide="github" width="20"></i>
-                <span class="font-medium">GitHub</span>
-              </a>
+              <div class="flex gap-3 w-full sm:w-auto">
+                <a href="${contact.linkedin}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-1 shadow-sm">
+                  <i data-lucide="linkedin" width="20"></i>
+                  <span class="sr-only sm:not-sr-only font-medium">LinkedIn</span>
+                </a>
+                <a href="${contact.github}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-1 shadow-sm">
+                  <i data-lucide="github" width="20"></i>
+                  <span class="sr-only sm:not-sr-only font-medium">GitHub</span>
+                </a>
+              </div>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-4 text-slate-500 dark:text-slate-400 text-sm">
+            <div class="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-2 sm:gap-4 text-slate-500 dark:text-slate-400 text-sm">
               <div class="flex items-center gap-1">
                 <i data-lucide="map-pin" width="14"></i>
                 <span>${contact.location}</span>
               </div>
-              <div class="hidden md:block w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+              <div class="hidden sm:block w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
               <div>${contact.email}</div>
             </div>
           </div>
 
           <!-- Profile Image -->
           <div class="flex-1 flex justify-center md:justify-end reveal transition-delay-200">
-            <div class="relative w-64 h-64 md:w-80 md:h-80">
+            <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 shrink-0">
               <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
               <img 
                 src="${PROFILE_IMAGE}" 
@@ -142,9 +147,8 @@ function Skills() {
     </div>
   `).join('');
 
-  // SpotLight Card Class added
   const listHTML = RESUME_DATA.skills.map((category, idx) => `
-    <div class="spotlight-card bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all hover:-translate-y-1">
+    <div class="spotlight-card bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all hover:-translate-y-1 h-full">
       <h3 class="font-bold text-slate-800 dark:text-white mb-3 flex items-center gap-2 relative z-10">
         <span class="w-2.5 h-2.5 rounded-full ${COLORS[idx % COLORS.length]} shadow-[0_0_8px_currentColor]"></span>
         ${category.name}
@@ -160,18 +164,18 @@ function Skills() {
   `).join('');
 
   return `
-    <section id="skills" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <section id="skills" class="py-16 md:py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
       <div class="container mx-auto px-4">
-        <div class="text-center mb-16 reveal">
-          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Technical Proficiency</h2>
+        <div class="text-center mb-12 md:mb-16 reveal">
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">Technical Proficiency</h2>
           <p class="text-slate-500 dark:text-slate-400">A quantitative look at my technical toolkit</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none reveal">
+          <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 md:p-8 border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none reveal w-full">
             ${chartHTML}
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal transition-delay-200">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 reveal transition-delay-200 w-full">
             ${listHTML}
           </div>
         </div>
@@ -182,13 +186,13 @@ function Skills() {
 
 function Experience() {
   const experiencesHTML = RESUME_DATA.experience.map(exp => `
-    <div class="relative pl-8 md:pl-10 border-l-2 border-slate-200 dark:border-slate-700 pb-12 last:pb-0">
+    <div class="relative pl-6 md:pl-10 border-l-2 border-slate-200 dark:border-slate-700 pb-12 last:pb-0">
       <div class="absolute -left-[9px] top-0 w-4 h-4 bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-full shadow-[0_0_0_4px_rgba(59,130,246,0.1)]"></div>
       <div class="mb-2">
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white">${exp.role}</h3>
-        <div class="text-blue-600 dark:text-blue-400 font-semibold">${exp.company}</div>
+        <h3 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">${exp.role}</h3>
+        <div class="text-blue-600 dark:text-blue-400 font-semibold text-sm md:text-base">${exp.company}</div>
       </div>
-      <div class="flex items-center text-slate-500 dark:text-slate-400 text-sm mb-4 bg-slate-100 dark:bg-slate-800 w-fit px-3 py-1 rounded-full">
+      <div class="flex items-center text-slate-500 dark:text-slate-400 text-xs md:text-sm mb-4 bg-slate-100 dark:bg-slate-800 w-fit px-3 py-1 rounded-full">
         <i data-lucide="calendar" width="14" class="mr-2"></i>
         ${exp.duration}
       </div>
@@ -196,7 +200,7 @@ function Experience() {
         ${exp.description.map(desc => `
           <li class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed flex items-start gap-3">
             <span class="mt-2 w-1.5 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full shrink-0"></span>
-            ${desc}
+            <span class="flex-1">${desc}</span>
           </li>
         `).join('')}
       </ul>
@@ -204,16 +208,16 @@ function Experience() {
   `).join('');
 
   return `
-    <section id="experience" class="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <section id="experience" class="py-16 md:py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           
           <div class="reveal">
-            <div class="flex items-center gap-3 mb-10">
+            <div class="flex items-center gap-3 mb-8 md:mb-10">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl">
                 <i data-lucide="briefcase" width="24"></i>
               </div>
-              <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Experience</h2>
+              <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Experience</h2>
             </div>
             <div class="">
               ${experiencesHTML}
@@ -222,23 +226,23 @@ function Experience() {
 
           <div class="space-y-12 reveal transition-delay-200">
             <div>
-              <div class="flex items-center gap-3 mb-10">
+              <div class="flex items-center gap-3 mb-8 md:mb-10">
                 <div class="p-3 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl">
                    <i data-lucide="graduation-cap" width="24"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Education</h2>
+                <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Education</h2>
               </div>
               
               ${RESUME_DATA.education.map(edu => `
-                <div class="spotlight-card bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                <div class="spotlight-card bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                   <div class="relative z-10">
                     <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">${edu.school}</h3>
-                        <span class="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full border border-green-200 dark:border-green-900">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">${edu.school}</h3>
+                        <span class="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full border border-green-200 dark:border-green-900 shrink-0">
                         CGPA 3.47
                         </span>
                     </div>
-                    <div class="text-slate-700 dark:text-slate-300 font-medium mb-1">${edu.degree}</div>
+                    <div class="text-slate-700 dark:text-slate-300 font-medium mb-1 text-sm md:text-base">${edu.degree}</div>
                     <div class="text-slate-400 text-sm mb-6">${edu.duration}</div>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         <span class="font-semibold text-slate-900 dark:text-slate-200 block mb-2">Key Coursework:</span>
@@ -254,7 +258,7 @@ function Experience() {
                 <div class="p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl">
                   <i data-lucide="award" width="24"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Activities</h2>
+                <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Activities</h2>
               </div>
               <div class="grid gap-4">
                 ${RESUME_DATA.activities.map(act => {
@@ -284,22 +288,21 @@ function Projects() {
     'from-emerald-600 to-teal-500'
   ];
 
-  // Added spotlight-card class and relative z-10 wrappers
   const projectsHTML = RESUME_DATA.projects.map((project, idx) => {
     const gradient = gradients[idx % gradients.length];
     const techHTML = project.tech.split(', ').map(tech => 
-      `<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">${tech}</span>`
+      `<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md whitespace-nowrap">${tech}</span>`
     ).join('');
 
     return `
       <div class="spotlight-card group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 reveal">
         <!-- Image Area -->
-        <div class="h-48 bg-gradient-to-br ${gradient} p-6 flex flex-col justify-end relative overflow-hidden z-10">
+        <div class="h-40 md:h-48 bg-gradient-to-br ${gradient} p-6 flex flex-col justify-end relative overflow-hidden z-10 shrink-0">
           <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
           <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-lg text-white">
              <i data-lucide="code-2" width="20"></i>
           </div>
-          <h3 class="text-xl font-bold text-white relative z-10 drop-shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${project.title}</h3>
+          <h3 class="text-xl font-bold text-white relative z-10 drop-shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300 line-clamp-2">${project.title}</h3>
         </div>
         
         <div class="p-6 flex-1 flex flex-col relative z-10">
@@ -314,9 +317,9 @@ function Projects() {
 
           <ul class="space-y-2 mb-8 flex-1">
             ${project.description.slice(0, 3).map(desc => 
-              `<li class="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
+              `<li class="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2 line-clamp-2">
                  <span class="mt-1.5 w-1 h-1 bg-slate-400 rounded-full shrink-0"></span>
-                 ${desc}
+                 <span>${desc}</span>
               </li>`
             ).join('')}
           </ul>
@@ -330,9 +333,9 @@ function Projects() {
   }).join('');
 
   return `
-    <section id="projects" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <section id="projects" class="py-16 md:py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
       <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-4 reveal">
           <div class="max-w-2xl">
              <div class="text-blue-600 dark:text-blue-400 font-bold tracking-wider uppercase text-sm mb-2">Portfolio</div>
              <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Featured Projects</h2>
@@ -340,11 +343,11 @@ function Projects() {
                Showcasing real-world applications of Data Analytics, Machine Learning, and Software Development.
              </p>
           </div>
-          <a href="${RESUME_DATA.contact.github}" target="_blank" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          <a href="${RESUME_DATA.contact.github}" target="_blank" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap">
             View Github <i data-lucide="external-link" width="16"></i>
           </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           ${projectsHTML}
         </div>
       </div>
@@ -354,15 +357,15 @@ function Projects() {
 
 function Testimonials() {
   return `
-    <section class="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
+    <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
       <div class="container mx-auto px-4 reveal">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">What People Say</h2>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">What People Say</h2>
         </div>
         
-        <div class="max-w-4xl mx-auto relative bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl dark:shadow-none border border-slate-100 dark:border-slate-800">
-          <div class="absolute top-8 left-8 text-blue-100 dark:text-slate-800">
-            <i data-lucide="quote" width="64" height="64"></i>
+        <div class="max-w-4xl mx-auto relative bg-white dark:bg-slate-900 rounded-3xl p-6 md:p-12 shadow-2xl dark:shadow-none border border-slate-100 dark:border-slate-800">
+          <div class="absolute top-6 left-6 md:top-8 md:left-8 text-blue-100 dark:text-slate-800">
+            <i data-lucide="quote" width="48" height="48"></i>
           </div>
           
           <div id="testimonial-container" class="relative z-10 min-h-[180px] flex items-center justify-center">
@@ -387,7 +390,7 @@ function Footer() {
   return `
     <footer class="bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div class="container mx-auto px-4 text-center">
-        <div class="flex justify-center gap-8 mb-8">
+        <div class="flex justify-center gap-6 md:gap-8 mb-8">
            <a href="#home" class="p-3 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-blue-600 hover:text-white transition-all hover:-translate-y-1">
              <i data-lucide="arrow-up" width="20"></i>
            </a>
@@ -432,13 +435,31 @@ function setupUI() {
   const mobileMenu = document.getElementById('mobile-menu');
   let isMenuOpen = false;
 
-  menuBtn?.addEventListener('click', () => {
+  const closeMenu = () => {
+    isMenuOpen = false;
+    mobileMenu.classList.add('hidden');
+  };
+
+  menuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
     isMenuOpen = !isMenuOpen;
     if (isMenuOpen) {
       mobileMenu.classList.remove('hidden');
     } else {
       mobileMenu.classList.add('hidden');
     }
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        closeMenu();
+    }
+  });
+
+  // Close menu when clicking a link
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
   });
 
   // 3. Scroll Animations (Observer)
@@ -467,9 +488,9 @@ function setupUI() {
   const renderTestimonial = () => {
     const t = TESTIMONIALS[currentTestimonial];
     container.innerHTML = `
-      <div class="text-center animate-fade-in px-4">
-        <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 font-medium italic mb-6 leading-relaxed">"${t.text}"</p>
-        <h4 class="font-bold text-slate-900 dark:text-white">${t.name}</h4>
+      <div class="text-center animate-fade-in px-2 md:px-4">
+        <p class="text-base md:text-xl text-slate-700 dark:text-slate-300 font-medium italic mb-6 leading-relaxed">"${t.text}"</p>
+        <h4 class="font-bold text-slate-900 dark:text-white text-lg">${t.name}</h4>
         <div class="text-sm text-blue-600 dark:text-blue-400 font-medium">${t.role}</div>
       </div>
     `;
