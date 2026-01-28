@@ -1,28 +1,34 @@
+
 body { 
   font-family: 'Inter', sans-serif; 
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
-  width: 100%;
+  background-color: #05060f;
+  color: #e2e8f0;
+  overflow-x: hidden;
 }
 
-/* Glassmorphism */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque for better readability */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.85);
-  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+/* Glassmorphism Console Panels */
+.console-panel {
+  background: rgba(13, 14, 28, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.console-header {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Scroll Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.active {
@@ -30,98 +36,82 @@ body {
   transform: translateY(0);
 }
 
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #05060f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #1a1b2e;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #7c3aed;
 }
 
-/* Animation Utilities */
-@keyframes fadeIn {
+/* Glow effects */
+.glow-text-cyan {
+  text-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+.glow-text-purple {
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+.code-keyword { color: #d946ef; font-weight: bold; }
+.code-string { color: #10b981; }
+.code-comment { color: #475569; font-style: italic; }
+.code-var { color: #06b6d4; }
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6rem;
+  height: 1.1rem;
+  background-color: #06b6d4;
+  margin-left: 4px;
+  animation: cursor-blink 1.2s infinite;
+  vertical-align: middle;
+}
+
+/* Background grid */
+.bg-grid {
+  background-size: 60px 60px;
+  background-image: radial-gradient(circle, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+}
+
+.scanline {
+  width: 100%;
+  height: 4px;
+  background: rgba(124, 58, 237, 0.015);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+  animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fade-in 0.4s ease-out forwards;
 }
 
-/* Dot Grid Background */
-.bg-dot-grid {
-  background-size: 40px 40px;
-  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-}
-.dark .bg-dot-grid {
-  background-image: radial-gradient(circle, #334155 1px, transparent 1px);
-}
-
-/* Spotlight Effect */
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-  /* Default border for mobile/touch where hover doesn't exist */
-  border: 1px solid rgba(226, 232, 240, 0.8); 
-}
-.dark .spotlight-card {
-  border: 1px solid rgba(51, 65, 85, 0.5);
-}
-
-.spotlight-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    800px circle at var(--mouse-x) var(--mouse-y),
-    rgba(59, 130, 246, 0.15),
-    transparent 40%
-  );
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Only enable hover effect on devices that support hover */
-@media (hover: hover) {
-  .spotlight-card:hover::before {
-    opacity: 1;
-  }
-}
-
-/* For Dark Mode Spotlight */
-.dark .spotlight-card::before {
-  background: radial-gradient(
-    800px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.06),
-    transparent 40%
-  );
-}
-
-/* Hacker Text Cursor */
-.hacker-text {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* Utility for text gradients */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Visibility Helper for Debugging in case observer fails */
+.reveal-static {
+    opacity: 1 !important;
+    transform: none !important;
 }

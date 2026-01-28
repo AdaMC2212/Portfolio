@@ -13,8 +13,8 @@ const Skills: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 reveal">
-            <div className="console-panel p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:border-hacker-accent/30 transition-all group">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="reveal console-panel p-6 rounded-xl border border-white/10 bg-white/[0.01] hover:border-hacker-accent/30 transition-all group">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-2.5 bg-hacker-accent/10 text-hacker-accent rounded-lg border border-hacker-accent/20">
                   <Terminal size={22} />
@@ -25,7 +25,7 @@ const Skills: React.FC = () => {
               <p className="text-xs text-slate-600 font-mono leading-relaxed">Pandas, NumPy, Scikit-learn, Flask</p>
             </div>
 
-            <div className="console-panel p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:border-hacker-cyan/30 transition-all group">
+            <div className="reveal console-panel p-6 rounded-xl border border-white/10 bg-white/[0.01] hover:border-hacker-cyan/30 transition-all group">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-2.5 bg-hacker-cyan/10 text-hacker-cyan rounded-lg border border-hacker-cyan/20">
                   <Database size={22} />
@@ -36,7 +36,7 @@ const Skills: React.FC = () => {
               <p className="text-xs text-slate-600 font-mono leading-relaxed">MSSQL, DB Design, Normalization</p>
             </div>
 
-            <div className="console-panel p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:border-emerald-500/30 transition-all group">
+            <div className="reveal console-panel p-6 rounded-xl border border-white/10 bg-white/[0.01] hover:border-emerald-500/30 transition-all group">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-2.5 bg-emerald-500/10 text-emerald-500 rounded-lg border border-emerald-500/20">
                   <Cpu size={22} />
@@ -47,7 +47,7 @@ const Skills: React.FC = () => {
               <p className="text-xs text-slate-600 font-mono leading-relaxed">Tableau, PowerBI, Matplotlib</p>
             </div>
 
-            <div className="console-panel p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:border-hacker-magenta/30 transition-all group">
+            <div className="reveal console-panel p-6 rounded-xl border border-white/10 bg-white/[0.01] hover:border-hacker-magenta/30 transition-all group">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-2.5 bg-hacker-magenta/10 text-hacker-magenta rounded-lg border border-hacker-magenta/20">
                   <Layout size={22} />
@@ -60,8 +60,8 @@ const Skills: React.FC = () => {
           </div>
 
           <div className="reveal">
-            <div className="console-panel rounded-xl overflow-hidden border border-white/5 bg-black/40 shadow-2xl">
-              <div className="console-header px-4 py-3 flex items-center gap-3 border-b border-white/5 bg-white/5">
+            <div className="console-panel rounded-xl overflow-hidden border border-white/10 bg-black/40 shadow-2xl">
+              <div className="console-header px-4 py-3 flex items-center gap-3 border-b border-white/10 bg-white/5">
                 <FileText size={16} className="text-slate-500" />
                 <span className="text-[11px] font-mono text-slate-400">requirements.txt — Editor</span>
               </div>
@@ -87,7 +87,7 @@ const Skills: React.FC = () => {
                 </div>
                 <div className="opacity-40"># End of requirements</div>
                 
-                <div className="mt-12 pt-4 border-t border-white/5 flex justify-between text-[9px] text-slate-700 uppercase tracking-widest">
+                <div className="mt-12 pt-4 border-t border-white/10 flex justify-between text-[9px] text-slate-700 uppercase tracking-widest">
                   <span>UTF-8  Line 14, Col 1</span>
                 </div>
               </div>
