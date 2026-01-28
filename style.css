@@ -1,4 +1,62 @@
-/* ... existing code ... */
+body { 
+  font-family: 'Inter', sans-serif; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+  width: 100%;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque for better readability */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Scroll Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
 
 /* Dot Grid Background */
 .bg-dot-grid {
@@ -15,6 +73,11 @@
 .spotlight-card {
   position: relative;
   overflow: hidden;
+  /* Default border for mobile/touch where hover doesn't exist */
+  border: 1px solid rgba(226, 232, 240, 0.8); 
+}
+.dark .spotlight-card {
+  border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
 .spotlight-card::before {
@@ -35,8 +98,11 @@
   z-index: 1;
 }
 
-.spotlight-card:hover::before {
-  opacity: 1;
+/* Only enable hover effect on devices that support hover */
+@media (hover: hover) {
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
 }
 
 /* For Dark Mode Spotlight */
@@ -51,4 +117,11 @@
 /* Hacker Text Cursor */
 .hacker-text {
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* Utility for text gradients */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
