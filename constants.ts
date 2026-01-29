@@ -3,8 +3,8 @@ import { ResumeData } from './types';
 
 export const RESUME_DATA: ResumeData = {
   name: "Chia Yong Xiang",
-  title: "Data Analytics & Machine Learning Enthusiast",
-  summary: "Analyzing operational frictions and automating manual workflows with terminal-grade precision. Specialized in transforming raw complexity into streamlined automation.",
+  title: "Data Analytics Undergraduate",
+  summary: "Data Analytics undergraduate with hands-on experience in machine learning, SQL databases, and data visualization. Adept at developing automation scripts to streamline manual workflows and increase operational efficiency. Passionate about leveraging data to solve real-world business challenges.",
   contact: {
     location: "Kuala Lumpur, Malaysia",
     phone: "+6010 288 0720",
@@ -15,52 +15,53 @@ export const RESUME_DATA: ResumeData = {
   education: [
     {
       school: "Asia Pacific University (APU)",
-      degree: "Bachelor of Science (Hons) in Computer Science (Data Analytics)",
-      duration: "2022.06 – 2025.06",
+      degree: "BSc (Hons) in Computer Science (Data Analytics)",
+      duration: "June 2022 – June 2025",
       details: [
         "CGPA: 3.47",
-        "Dean's List Recipient",
-        "Core Courses: Deep Learning, Text and Sentiment Analytics, Business Intelligence"
+        "Core Courses: Data Structure, Data Management, Programming for Data Analysis, Database Security, Object Orientated Development with Java, Deep Learning, Text and Sentiment Analytics, Business Intelligence System"
       ]
     }
   ],
   experience: [
     {
-      company: "TPLINK Distribution Malaysia Sdn. Bhd.",
-      role: "Business Analyst Intern",
-      duration: "2024.03 – 2024.08",
+      company: "SHOPEE",
+      role: "Chatbot Business Analyst",
+      duration: "August 2025 – Present",
       description: [
-        "Lead automation initiatives for supply chain tracking, focusing on reducing operational bottlenecks through script-based monitoring.",
-        "Created data reports summarizing online sales performance and marketing activities."
+        "Optimized chatbot script efficiency by conducting data analysis to identify friction points and redesigning conversation flows.",
+        "Engineered technical solutions to automate manual operational workflows, reducing processing time.",
+        "Collaborated with Product, Operations, WFM, and CS stakeholders to drive higher deflection rates."
+      ]
+    },
+    {
+      company: "TPLINK",
+      role: "Marketing & Business Analyst Intern",
+      duration: "March 2024 – August 2024",
+      description: [
+        "Assisted marketing team in market research, competitive analysis, social media management and online advertising.",
+        "Created and maintained data reports summarizing performance of online sales and marketing activities.",
+        "Aided in maintaining the online flagship store, including product listing and inventory management."
       ]
     }
   ],
   projects: [
     {
-      title: "Phishing Detector",
-      tech: "Python, LightGBM",
+      title: "Phishing URL Detector",
+      tech: "Python, LightGBM, NLP",
       date: "May 2025",
       description: [
-        "Analyzes 10k+ daily URL patterns for real-time fraud mitigation using ML and NLP.",
-        "Deployed via Flask with SHAP-based explainability."
+        "Developed a real-time phishing URL detection system combining handcrafted features with TF-IDF text representation.",
+        "Evaluated multiple models and identified LightGBM as the most accurate and robust on external datasets."
       ]
     },
     {
-      title: "Mahjong Calc",
-      tech: "Algorithm, React",
-      date: "Dec 2024",
+      title: "3 Player Mahjong Calc",
+      tech: "TypeScript, React",
+      date: "October 2025",
       description: [
-        "Automated rule engine for complex winning states and state verification.",
-        "Optimized for zero-latency mobile interactions."
-      ]
-    },
-    {
-      title: "Automation Bridge",
-      tech: "T-SQL, Node.js",
-      date: "May 2023",
-      description: [
-        "Middleware syncing legacy SQL with cloud-native datapipelines.",
-        "Implemented business rules and query optimization."
+        "Instantly computes net payouts/losses based on hand value and win type, eliminating manual calculation errors.",
+        "Built with a dedicated ruleset engine accounting for unique 3-player mechanics and specific scoring adaptations."
       ]
     }
   ],
@@ -69,10 +70,10 @@ export const RESUME_DATA: ResumeData = {
     "SAS Curiosity Cup 2023: Applied real-world analytics skills in global competition."
   ],
   skills: [
-    { name: "Python Core", skills: ["Pandas", "NumPy", "Scikit-learn", "Flask"], level: 90 },
-    { name: "Data Architecture", skills: ["MSSQL", "DB Design", "Normalization"], level: 85 },
-    { name: "Intelligence", skills: ["Tableau", "Power BI", "Matplotlib"], level: 80 },
-    { name: "Development", skills: ["Java", "C++", "R", "Deep Learning"], level: 75 }
+    { name: "Programming", skills: ["Python", "SQL", "Java", "C++", "R", "SAS", "App Script"], level: 90 },
+    { name: "Data Intel", skills: ["Power BI", "Tableau", "Matplotlib", "Kaggle"], level: 85 },
+    { name: "Analysis", skills: ["Data Management", "Deep Learning", "NLP"], level: 80 },
+    { name: "Suite", skills: ["Excel", "Jupyter", "Photoshop", "Git"], level: 85 }
   ]
 };
 
@@ -105,5 +106,5 @@ GUIDELINES:
 1. Answer questions in the first person (as if you are Chia).
 2. Highlight your strengths in Data Analytics, Machine Learning, and SQL.
 3. Be friendly, professional, and concise.
-4. If asked about contact info, provide the email or LinkedIn link.
+4. If asked about contact info, provide the email (adamchia2212@gmail.com) or LinkedIn link.
 `;

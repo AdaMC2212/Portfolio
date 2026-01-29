@@ -71,7 +71,7 @@ const App: React.FC = () => {
               <div className="bg-black/60 rounded-xl p-8 font-mono text-sm border border-white/10 shadow-2xl">
                 <div className="flex items-center gap-3 mb-6 text-slate-600">
                    <TerminalIcon size={16} />
-                   <span className="text-xs">user@admin:~$ send_email --to="chia.yx"</span>
+                   <span className="text-xs">user@admin:~$ send_email --to="adamchia2212@gmail.com"</span>
                 </div>
                 <div className="flex flex-col gap-4">
                    <a href="https://linkedin.com/in/yong-xiang-chia" target="_blank" className="text-hacker-cyan hover:text-white transition-colors flex items-center justify-between group">LinkedIn <span className="opacity-0 group-hover:opacity-100 transition-opacity">--access</span></a>
@@ -87,7 +87,7 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="py-16 bg-hacker-bg text-[10px] font-mono text-slate-700 border-t border-white/5 uppercase tracking-[0.4em]">
         <div className="container mx-auto px-4 text-center space-y-6">
-          <p>© 2024 Chia Yong Xiang — The Glass Console V3.1</p>
+          <p>© 2026 Chia Yong Xiang</p>
           <div className="flex justify-center gap-16 opacity-40">
             <span>Optimized for Recruitment</span>
             <span>Designed for Depth</span>
