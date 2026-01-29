@@ -35,36 +35,37 @@ export const RESUME_DATA = {
   ],
   projects: [
     {
-      title: "Detecting Phishing URL using ML and NLP",
-      tech: "Jupyter Notebook, Flask, LightGBM, SHAP",
+      title: "Phishing URL Detection System",
+      tech: "Python, LightGBM, NLP, Jupyter",
       date: "May 2025",
       description: [
-        "Developed a real-time phishing URL detection system using ML and NLP, combining handcrafted URL features with TF-IDF text representation.",
-        "Evaluated multiple models and identified LightGBM as the most accurate and robust, including on external datasets.",
-        "Deployed the solution via a Flask web app with SHAP-based explainability and reporting features."
+        "Developed a real-time phishing URL detection system combining handcrafted features with TF-IDF text representation.",
+        "Evaluated multiple models and identified LightGBM as the most accurate and robust on external datasets."
       ],
-      link: "https://github.com/AdaMC2212"
+      link: "https://github.com/AdaMC2212/Phishing_URL_Detection_System---Jupyter-Notebook",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
     },
     {
-      title: "Spam Email Classification",
-      tech: "Jupyter Notebook, Python, NLP",
+      title: "3 Player Mahjong Calculator",
+      tech: "TypeScript, React, Vite",
+      date: "October 2025",
+      description: [
+        "Instantly computes net payouts/losses based on hand value and win type, eliminating manual calculation errors.",
+        "Built with a dedicated ruleset engine accounting for unique 3-player mechanics and specific scoring adaptations."
+      ],
+      link: "https://github.com/AdaMC2212/3P-Mahjong-Calculator",
+      image: "https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      title: "Medical Info System (MSSQL)",
+      tech: "SQL, Database Design, Relational",
       date: "December 2024",
       description: [
-        "Built an effective Supervised Text Classification model using Jupyter Notebook to detect spam emails.",
-        "Applied advanced tokenization, lemmatization, and text normalization techniques to extract meaningful linguistic patterns from spam emails."
+        "Designed and implemented a comprehensive medical management database with complex relational structures.",
+        "Optimized queries for patient record management and automated report generation for clinical operations."
       ],
-      link: "https://github.com/AdaMC2212"
-    },
-    {
-      title: "E-Book Database System",
-      tech: "MSSQL Server",
-      date: "May 2023",
-      description: [
-        "Developed relational database for E-bookstore using MSSQL Server.",
-        "Implemented business rules, normalization, DDL, and DML operations.",
-        "Designed ERD and established entity relationships."
-      ],
-      link: "https://github.com/AdaMC2212"
+      link: "https://github.com/AdaMC2212/Medical-Info-System---MSSQL",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800"
     }
   ],
   activities: [
@@ -87,7 +88,7 @@ export const NAV_LINKS = [
   { label: "Projects", href: "#projects" }
 ];
 
-export const PROFILE_IMAGE = "https://i.postimg.cc/MZ46q9pS/01f0a560-f3a2-4f5e-af0b-119261af1df9.jpg";
+export const PROFILE_IMAGE = "profile.jpeg";
 
 export const TESTIMONIALS = [
   {

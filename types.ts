@@ -1,3 +1,4 @@
+
 export interface ContactInfo {
   phone: string;
   email: string;
@@ -20,11 +21,14 @@ export interface ExperienceItem {
   description: string[];
 }
 
+// Added link and image properties to match RESUME_DATA structure in constants.ts
 export interface ProjectItem {
   title: string;
   tech: string;
   date: string;
   description: string[];
+  link?: string;
+  image?: string;
 }
 
 export interface SkillCategory {
@@ -37,6 +41,7 @@ export interface ResumeData {
   name: string;
   title: string;
   summary: string;
+  profileImage?: string;
   contact: ContactInfo;
   education: EducationItem[];
   experience: ExperienceItem[];
