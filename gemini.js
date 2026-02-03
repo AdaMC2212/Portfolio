@@ -6,7 +6,6 @@ let ai = null;
 
 const getAIClient = () => {
   if (!ai) {
-    // The API key must be obtained exclusively from the environment variable process.env.API_KEY.
     ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   }
   return ai;
@@ -18,7 +17,6 @@ export const generateChatResponseStream = async function* (
 ) {
   const client = getAIClient();
   
-  // Use 'gemini-3-flash-preview' for basic text tasks as per recommendations.
   const chat = client.chats.create({
     model: 'gemini-3-flash-preview',
     config: {
