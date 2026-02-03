@@ -2,22 +2,13 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { SYSTEM_INSTRUCTION } from "../constants";
 
-let ai: GoogleGenAI | null = null;
-
-const getAIClient = () => {
-  if (!ai) {
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  }
-  return ai;
-};
-
 export const generateChatResponseStream = async function* (
   history: { role: string; text: string }[],
   message: string
 ) {
-  const client = getAIClient();
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
-  const chat = client.chats.create({
+  const chat = ai.chats.create({
     model: 'gemini-3-flash-preview',
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
@@ -25,7 +16,8 @@ export const generateChatResponseStream = async function* (
       topK: 40,
       topP: 0.95,
     },
-    history: history.map(h => ({
+    // Filter out any messages with empty text to prevent API errors
+    history: history.filter(h => h.text && h.text.trim() !== "").map(h => ({
       role: h.role === 'user' ? 'user' : 'model',
       parts: [{ text: h.text }]
     }))
@@ -35,13 +27,20 @@ export const generateChatResponseStream = async function* (
     const result = await chat.sendMessageStream({ message });
 
     for await (const chunk of result) {
-      const response = chunk as GenerateContentResponse;
-      if (response.text) {
-        yield response.text;
+      // Direct access to .text property (not a method)
+      const text = (chunk as GenerateContentResponse).text;
+      if (text) {
+        yield text;
       }
     }
-  } catch (error) {
-    console.error("Gemini API Error:", error);
+  } catch (error: any) {
+    console.error("Gemini API Error details:", error);
+    
+    // Check for common error signatures
+    if (error?.message?.includes("API_KEY_INVALID") || error?.status === 403) {
+      throw new Error("INVALID_API_KEY");
+    }
+    
     throw error;
   }
 };

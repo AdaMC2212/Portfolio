@@ -1,13 +1,14 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { generateChatResponseStream } from '../services/gemini';
 import { ChatMessage } from '../types';
-import { MessageSquare, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
+import { Terminal, Send, X, Bot, User, Loader2, Command, AlertCircle } from 'lucide-react';
 
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hi! I'm Chia's AI assistant. Ask me anything about his projects, skills, or experience!" }
+    { role: 'model', text: "Access granted. Systems initialized. I'm Chia's AI node. How can I assist with your inquiry?" }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,10 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const history = messages.map(m => ({ role: m.role, text: m.text }));
+      const history = messages
+        .filter(m => !m.isError)
+        .map(m => ({ role: m.role, text: m.text }));
+        
       const stream = generateChatResponseStream(history, userMessage);
       
       let fullResponse = "";
@@ -46,55 +50,68 @@ const ChatBot: React.FC = () => {
           });
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Chat error:", error);
-      setMessages(prev => [...prev, { role: 'model', text: "Sorry, I encountered an issue connecting to the AI. Please try again later.", isError: true }]);
+      let errorText = "Critical error in AI handshake. Please verify your internet connection or API Key configuration.";
+      
+      if (error?.message === "INVALID_API_KEY") {
+        errorText = "Invalid API Key detected. Please ensure your environment variable is set correctly in Vercel/Local settings.";
+      }
+
+      setMessages(prev => {
+        const historyWithoutEmpty = prev.filter(m => m.text !== "");
+        return [...historyWithoutEmpty, { role: 'model', text: errorText, isError: true }];
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end font-mono">
       {isOpen ? (
-        <div className="w-80 sm:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col h-[500px] transition-all duration-300 ease-out transform translate-y-0 opacity-100">
+        <div className="w-80 sm:w-[400px] console-panel rounded-lg shadow-2xl overflow-hidden flex flex-col h-[500px] border border-hacker-accent/30 animate-fade-in">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 flex justify-between items-center text-white">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-yellow-300" />
-              <div>
-                <h3 className="font-semibold text-sm">Ask AI about Chia</h3>
-                <p className="text-xs text-blue-100 opacity-90">Powered by Gemini 2.5</p>
+          <div className="console-header px-4 py-3 flex justify-between items-center bg-black/40">
+            <div className="flex items-center gap-2 text-hacker-accent">
+              <Command size={14} />
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-widest leading-none">AI_TERMINAL_V2.5</span>
+                <span className="text-[8px] text-emerald-500 leading-none">LINK_ACTIVE</span>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:bg-white/20 rounded-full p-1 transition-colors">
-              <X className="w-5 h-5" />
+            <button onClick={() => setIsOpen(false)} className="hover:bg-white/10 rounded p-1 transition-colors text-slate-500">
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-black/20 scrollbar-hide">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex items-start gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${msg.role === 'user' ? 'bg-indigo-100 text-indigo-600' : 'bg-blue-100 text-blue-600'}`}>
-                  {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+              <div key={idx} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className={`flex items-center gap-2 mb-1 text-[8px] uppercase tracking-widest ${msg.role === 'user' ? 'text-hacker-magenta' : 'text-hacker-cyan'}`}>
+                  {msg.role === 'user' ? <><span className="text-slate-700">Guest_Access</span> <User size={10} /></> : <><Bot size={10} /> <span className="text-slate-700">System_Node</span></>}
                 </div>
-                <div className={`max-w-[80%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
+                <div className={`max-w-[90%] rounded p-3 text-xs leading-relaxed border flex gap-2 ${
                   msg.role === 'user' 
-                    ? 'bg-indigo-600 text-white rounded-tr-none' 
-                    : 'bg-white text-slate-700 border border-slate-100 rounded-tl-none'
-                } ${msg.isError ? 'bg-red-50 text-red-600 border-red-200' : ''}`}>
-                  {msg.text}
+                    ? 'bg-hacker-magenta/5 border-hacker-magenta/20 text-slate-200' 
+                    : 'bg-hacker-cyan/5 border-hacker-cyan/20 text-slate-300'
+                } ${msg.isError ? 'border-red-500/50 text-red-400 bg-red-500/5' : ''}`}>
+                  {msg.isError && <AlertCircle size={14} className="shrink-0 mt-0.5" />}
+                  <span>
+                    {msg.text}
+                    {msg.role === 'model' && !isLoading && !msg.isError && idx === messages.length - 1 && <span className="cursor ml-1"></span>}
+                  </span>
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex items-start gap-2">
-                 <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                  <Bot size={16} />
+              <div className="flex flex-col items-start">
+                 <div className="flex items-center gap-2 mb-1 text-[8px] uppercase text-slate-700 tracking-widest">
+                   <Bot size={10} /> System_Processing
                 </div>
-                <div className="bg-white border border-slate-100 rounded-2xl rounded-tl-none px-4 py-2 shadow-sm">
-                  <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
+                <div className="bg-hacker-cyan/5 border border-hacker-cyan/20 rounded p-3">
+                  <Loader2 className="w-3 h-3 animate-spin text-hacker-cyan" />
                 </div>
               </div>
             )}
@@ -102,18 +119,19 @@ const ChatBot: React.FC = () => {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
+          <form onSubmit={handleSubmit} className="p-3 bg-black/40 border-t border-slate-800 flex gap-2">
+            <span className="text-hacker-accent text-sm self-center">$</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about my SQL skills..."
-              className="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              placeholder="Enter command..."
+              className="flex-1 bg-transparent text-slate-300 text-xs focus:outline-none placeholder:text-slate-700"
             />
             <button 
               type="submit" 
               disabled={isLoading || !input.trim()}
-              className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
+              className="p-2 text-hacker-accent hover:text-hacker-cyan disabled:opacity-30 transition-colors"
             >
               <Send className="w-4 h-4" />
             </button>
@@ -122,10 +140,10 @@ const ChatBot: React.FC = () => {
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+          className="group flex items-center gap-3 bg-hacker-bg border border-hacker-accent/50 text-hacker-accent px-5 py-3 rounded-md shadow-[0_0_20px_rgba(124,58,237,0.2)] hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:bg-hacker-accent/10 transition-all duration-300"
         >
-          <MessageSquare className="w-5 h-5 group-hover:animate-bounce" />
-          <span className="font-medium">Chat with Resume</span>
+          <Terminal className="w-5 h-5 group-hover:animate-pulse" />
+          <span className="text-xs uppercase tracking-[0.2em] font-bold">Initiate_Comms</span>
         </button>
       )}
     </div>

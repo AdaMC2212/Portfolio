@@ -5,7 +5,7 @@ export const RESUME_DATA = {
   name: "Chia Yong Xiang",
   title: "Data Analytics Undergraduate",
   summary: "Data Analytics undergraduate with hands-on experience in machine learning, SQL databases, and data visualization. Adept at developing automation scripts to streamline manual workflows and increase operational efficiency. Passionate about leveraging data to solve real-world business challenges.",
-  profileImage: "./image.png", 
+  profileImage: "/image.png", 
   contact: {
     location: "Kuala Lumpur, Malaysia",
     phone: "+6010 288 0720",

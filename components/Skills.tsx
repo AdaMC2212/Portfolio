@@ -8,7 +8,7 @@ const Skills: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="mb-16">
           <h2 className="text-4xl font-bold text-white mb-2">Tech Stack</h2>
-          <p className="font-mono text-hacker-accent text-sm">cat requirements.txt</p>
+          <p className="font-mono text-hacker-accent text-sm">requirements.txt</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
